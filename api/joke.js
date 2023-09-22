@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         if (intentName === "piada.adicionar") {
             await Joke.create({ 
                 list: "pessoal",
-                text: text 
+                text: userText 
             });
 
             message = 'Adicionei mais uma piada na sua lista, depois eu conto ela pra vc hehe';
