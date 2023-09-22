@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    const string = JSON.stringify(req);
+    const string = req.body.queryResult.intent.displayName;
 
     try {
         // await mongoose.connect(process.env.MONGO_DB_URI);
