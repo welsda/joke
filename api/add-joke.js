@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
                 {
                   text: {
                     text: [
-                        `${req.body}`
+                        `${JSON.parse(req.body)}`
                     ]
                   }
                 }
