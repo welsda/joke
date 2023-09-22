@@ -120,7 +120,8 @@ module.exports = async (req, res) => {
                 }
             ]
         });
-    } finally {
-        await mongoose.disconnect();
     }
+    // } finally {
+    //     await mongoose.disconnect();
+    // }
 };
