@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
                 {
                   text: {
                     text: [
-                        `${req.queryResult.intent.displayName} e ${req.queryResult.queryText}`
+                        `${req}`
                     ]
                   }
                 }
