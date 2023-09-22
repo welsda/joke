@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    console.warn("informações do evento", req);
+    const string = JSON.stringify(req);
 
     try {
         // await mongoose.connect(process.env.MONGO_DB_URI);
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
                 {
                   text: {
                     text: [
-                        'blz'
+                        string
                     ]
                   }
                 }
