@@ -63,12 +63,12 @@
 //     return callback(null, response);
 // };
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const Joke = mongoose.model('Joke', {
-    list: String,
-    text: String
-});
+// const Joke = mongoose.model('Joke', {
+//     list: String,
+//     text: String
+// });
 
 module.exports = async (req, res) => { 
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -77,11 +77,11 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     try {
-        await mongoose.connect(process.env.MONGO_DB_URI);
+        // await mongoose.connect(process.env.MONGO_DB_URI);
                 
-        const jokes = await Joke.find({ list: 'pessoal' });
+        // const jokes = await Joke.find({ list: 'pessoal' });
 
-        if (jokes.length === 0) {
+        // if (jokes.length === 0) {
             return res.status(200).json({
                 fulfillmentMessages: [
                     {
@@ -93,21 +93,21 @@ module.exports = async (req, res) => {
                     }
                 ]
             });
-        } else {
-            const randomJoke = jokes[Math.floor(Math.random() * jokes.length)].text;
+        // } else {
+        //     const randomJoke = jokes[Math.floor(Math.random() * jokes.length)].text;
 
-            return res.status(200).json({
-                fulfillmentMessages: [
-                    {
-                      text: {
-                        text: [
-                            randomJoke
-                        ]
-                      }
-                    }
-                ]
-            });
-        }
+        //     return res.status(200).json({
+        //         fulfillmentMessages: [
+        //             {
+        //               text: {
+        //                 text: [
+        //                     randomJoke
+        //                 ]
+        //               }
+        //             }
+        //         ]
+        //     });
+        // }
     } catch (error) {
         return res.status(500).json({
             fulfillmentMessages: [
