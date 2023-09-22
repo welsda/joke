@@ -1,13 +1,16 @@
 {
     "functions": {
       "api/add-joke.js": {
-        "memory": 1024
+        "memory": 1024,
+        "maxDuration": 10
       },
       "api/get-general-joke.js": {
-        "memory": 1024
+        "memory": 1024,
+        "maxDuration": 10
       },
       "api/get-personal-joke.js": {
-        "memory": 1024
+        "memory": 1024,
+        "maxDuration": 10
       }
     }
 }
