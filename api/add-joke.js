@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    console.log("evento", req);
+    console.warn("informações do evento", req);
 
     try {
         // await mongoose.connect(process.env.MONGO_DB_URI);
