@@ -1,4 +1,6 @@
 {
-    "functions": "api"
+    "functions": {
+      "api": "api"
+    }
 }
   

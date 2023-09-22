@@ -94,4 +94,3 @@ module.exports = async (req, res) => {
       await mongoose.disconnect();
   }
 };
-
