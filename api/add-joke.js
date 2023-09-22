@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     const requi = JSON.parse(req);
-    const body = requi;
+    const body = requi.queryResult.queryText;
 
     try {
         // await mongoose.connect(process.env.MONGO_DB_URI);
