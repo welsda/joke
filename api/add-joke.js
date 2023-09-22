@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    const requi = req;
+    const requi = JSON.parse(req);
     const body = requi.body;
 
     try {
