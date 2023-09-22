@@ -11,7 +11,8 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // const { text } = req.body;
+    const requi = req;
+    const body = requi.body;
 
     try {
         // await mongoose.connect(process.env.MONGO_DB_URI);
@@ -25,7 +26,7 @@ module.exports = async (req, res) => {
                 {
                   text: {
                     text: [
-                        `${JSON.stringify(req.body)}`
+                        body
                     ]
                   }
                 }
