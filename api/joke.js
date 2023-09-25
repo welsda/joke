@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
             });
 
             message = 'Adicionei mais uma piada na sua lista, quer que eu te conte uma piada agora?';
-        } else if (intentName === 'piada.contar') {
+        } else if (intentName === 'piada.aceitar' || intentName === 'piada.contar') {
             userText.toLowerCase().includes('pessoal') 
             ? list = 'pessoal' 
             : list = 'geral';
