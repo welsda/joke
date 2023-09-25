@@ -38,11 +38,11 @@ module.exports = async (req, res) => {
             if (list === 'pessoal') {
                 jokes.length === 0 
                 ? message = 'Vc não tem piadas na sua lista' 
-                : message = `${jokes[Math.floor(Math.random() * jokes.length)].text} kkkkk Quer mais uma?`;
+                : message = `${jokes[Math.floor(Math.random() * jokes.length)].text} Quer mais uma?`;
             } else {
                 jokes.length === 0 
                 ? message = 'Não consegui pensar em uma piada pra vc' 
-                : message = `${jokes[Math.floor(Math.random() * jokes.length)].text} kkkkk Quer mais uma?`;
+                : message = `${jokes[Math.floor(Math.random() * jokes.length)].text} Quer mais uma?`;
             }
         }
 
