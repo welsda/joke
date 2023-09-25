@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
 
     let list;
     let message;
+    let statusCode;
 
     try {
         await mongoose.connect(process.env.MONGO_DB_URI);
@@ -27,47 +28,39 @@ module.exports = async (req, res) => {
             });
 
             message = 'Adicionei mais uma piada na sua lista, depois eu conto ela pra vc hehe';
-        } else {
+        } else if (intentName === 'piada.contar') {
             userText.toLowerCase().includes('pessoal') 
             ? list = 'pessoal' 
-            : 'geral';
+            : list = 'geral';
 
             const jokes = await Joke.find({ list: list });
 
             if (list === 'pessoal') {
                 jokes.length === 0 
                 ? message = 'Vc não tem piadas na sua lista' 
-                : jokes[Math.floor(Math.random() * jokes.length)].text;
+                : message = jokes[Math.floor(Math.random() * jokes.length)].text;
             } else {
                 jokes.length === 0 
                 ? message = 'Não consegui pensar em uma piada pra vc' 
-                : jokes[Math.floor(Math.random() * jokes.length)].text;
+                : message = jokes[Math.floor(Math.random() * jokes.length)].text;
             }
-
-            message = list;
         }
 
-        return res.status(200).json({
-            fulfillmentMessages: [
-                {
-                  text: {
-                    text: [
-                        message
-                    ]
-                  }
-                }
-            ]
-        });
+        statusCode = 200;
     } catch (error) {
         if (intentName === "piada.adicionar" ) {
             message = 'Não deu pra adicionar sua piada na lista';
         } else {
             userText.toLowerCase().includes('pessoal') 
             ? message = 'Não deu pra pegar uma piada da sua lista' 
-            : message = 'Deu um erro aqui, espera um pouquinho?';
+            : message = 'Deu um erro aqui';
         }
 
-        return res.status(500).json({
+        statusCode = 400;
+    } finally {
+        await mongoose.disconnect();
+
+        return res.status(statusCode).json({
             fulfillmentMessages: [
                 {
                   text: {
@@ -78,7 +71,5 @@ module.exports = async (req, res) => {
                 }
             ]
         });
-    } finally {
-        await mongoose.disconnect();
     }
 };
