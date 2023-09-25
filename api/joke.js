@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
                 text: userText 
             });
 
-            message = 'Adicionei mais uma piada na sua lista, depois eu conto ela pra vc hehe';
+            message = 'Adicionei mais uma piada na sua lista, quer que eu te conte uma piada agora?';
         } else if (intentName === 'piada.contar') {
             userText.toLowerCase().includes('pessoal') 
             ? list = 'pessoal' 
