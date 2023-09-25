@@ -2,7 +2,7 @@
   "functions": {
     "api/joke.js": {
       "memory": 1024,
-      "maxDuration": 30
+      "maxDuration": 10
     }
   }
 }
