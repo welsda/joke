@@ -27,8 +27,8 @@ module.exports = async (req, res) => {
                 text: userText 
             });
 
-            message = 'Adicionei mais uma piada na sua lista, quer que eu te conte uma piada agora?';
-        } else if (intentName === 'piada.aceitar' || intentName === 'piada.contar') {
+            message = 'Adicionei uma piada na sua lista, quer que eu te conte uma agora?';
+        } else if (intentName === 'piada.contar') {
             userText.toLowerCase().includes('pessoal') 
             ? list = 'pessoal' 
             : list = 'geral';
@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
     } catch (error) {
         if (intentName === "piada.adicionar" ) {
             message = 'Não deu pra adicionar sua piada na lista';
-        } else {
+        } else if (intentName === 'piada.contar') {
             userText.toLowerCase().includes('pessoal') 
             ? message = 'Não deu pra pegar uma piada da sua lista' 
             : message = 'Deu um erro aqui';
