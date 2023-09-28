@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
             if (personalJokes.length === 0) {
                 message = 'Poxa, você não tem piadas na sua lista :/.\nAdicione uma no menu principal e depois volte aqui.\nAté a próxima haha';
             } else {
-                const personalJoke = personalJokes[Math.floor(Math.random() * personalJokes.length)].joke;
+                const personalJoke = personalJokes[Math.floor(Math.random() * personalJokes.length)];
 
                 message = `Contemple uma de suas pérolas ${personalJoke.name}\n${personalJoke.joke}\nAté a próxima haha`;
             }
