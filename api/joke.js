@@ -47,11 +47,11 @@ module.exports = async (req, res) => {
                         card: {
                           title: "Sem piadas na sua lista",
                           subtitle: "Adicione uma pelo menu principal e depois volte aqui",
-                          imageUri: "https://ciclovivo.com.br/wp-content/uploads/2018/10/iStock-536613027.jpg",
+                          imageUri: "https://indianmemetemplates.com/wp-content/uploads/okay-guy.jpg",
                           buttons: [
                             {
                               text: "Até lá, não fique sem rir, clique aqui e veja outras opções de piadas haha",
-                              postback: "https://indianmemetemplates.com/wp-content/uploads/okay-guy.jpg"
+                              postback: "https://www.piadas.com.br/"
                             }
                           ]
                         }
