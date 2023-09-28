@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
             } else {
                 const personalJoke = personalJokes[Math.floor(Math.random() * personalJokes.length)];
 
-                message = `Contemple uma de suas pérolas ${personalJoke.name}\n${personalJoke.joke}\nAté a próxima haha`;
+                message = `Contemple uma de suas pérolas ${personalJoke.name}:\n${personalJoke.joke}\nAté a próxima haha`;
             }
         }
 
