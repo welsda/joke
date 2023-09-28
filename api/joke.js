@@ -63,16 +63,6 @@ module.exports = async (req, res) => {
     } finally {
         await mongoose.disconnect();
 
-        return res.status(statusCode).json({
-            fulfillmentMessages: [
-                {
-                  text: {
-                    text: [
-                        message
-                    ]
-                  }
-                }
-            ]
-        });
+        return res.status(statusCode).json({ fulfillmentText: message });
     }
 };
