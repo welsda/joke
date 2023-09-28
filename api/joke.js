@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
                           imageUri: "https://indianmemetemplates.com/wp-content/uploads/okay-guy.jpg",
                           buttons: [
                             {
-                              text: "Até lá, não fique sem rir, clique aqui e veja outras opções de piadas haha",
+                              text: "Até lá, veja outras piadas aqui haha",
                               postback: "https://www.piadas.com.br/"
                             }
                           ]
