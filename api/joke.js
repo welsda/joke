@@ -30,29 +30,33 @@ module.exports = async (req, res) => {
                 ssn: ssn
             });
 
-            message = `Adicionei mais uma piada na sua lista, ${addedJoke._id} é o código dela para caso você queira atualiza-la ou deleta-la depois, quer que eu te conte uma piada agora?`;
+            message = `Adicionei mais uma piada na sua lista, ${addedJoke._id} é o código dela para caso você queira atualiza-la ou deleta-la depois.\nQuer que eu te conte uma piada agora?`;
         } else if (intentName === 'piada.geral') {
             const generalJokes = await Joke.find({ list: 'geral' });
 
             generalJokes.length === 0 
-            ? message = 'Hmm, parece que nosso banco de dados não têm piadas pra você :/, mas não se preocupe que logo menos estarão lá. Até a próxima haha' 
-            : message = `${generalJokes[Math.floor(Math.random() * generalJokes.length)].text} Até a próxima haha`;
+            ? message = 'Hmm, parece que nosso banco de dados não têm piadas pra você :/, mas não se preocupe que logo menos estarão lá.\nAté a próxima haha' 
+            : message = `${generalJokes[Math.floor(Math.random() * generalJokes.length)].joke}\nAté a próxima haha`;
         } else if (intentName === 'piada.pessoal') {
             const personalJokes = await Joke.find({ ssn: ssn });
 
-            personalJokes.length === 0 
-            ? message = 'Poxa, você não tem piadas na sua lista :/, adicione uma no menu principal e depois volte aqui. Até a próxima haha' 
-            : message = `${personalJokes[Math.floor(Math.random() * personalJokes.length)].text} Até a próxima haha`;
+            if (personalJokes.length === 0) {
+                message = 'Poxa, você não tem piadas na sua lista :/.\nAdicione uma no menu principal e depois volte aqui.\nAté a próxima haha';
+            } else {
+                const personalJoke = personalJokes[Math.floor(Math.random() * personalJokes.length)].joke;
+
+                message = `Contemple uma de suas pérolas ${personalJoke.name}\n${personalJoke.joke}\nAté a próxima haha`;
+            }
         }
 
         statusCode = 200;
     } catch (error) {
         if (intentName === 'piada.adicionar' ) {
-            message = 'Não deu pra adicionar sua piada na lista por conta de algo estranho :/, quem sabe depois. Até a próxima haha';
+            message = 'Não deu pra adicionar sua piada na lista por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha';
         } else if (intentName === 'piada.geral') {
-            message = 'Não deu pra pegar uma piada do nosso banco de dados pra você por conta de algo estranho :/, quem sabe depois. Até a próxima haha';
+            message = 'Não deu pra pegar uma piada do nosso banco de dados pra você por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha';
         } else if (intentName === 'piada.pessoal') {
-            message = 'Não deu pra pegar uma piada da sua lista por conta de algo estranho :/, quem sabe depois. Até a próxima haha';
+            message = 'Não deu pra pegar uma piada da sua lista por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha';
         }
 
         statusCode = 400;
