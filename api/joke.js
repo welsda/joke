@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     const intentName = req.body.queryResult.intent.displayName;
-    const { name, joke, ssn } = req.body.queryResult.parameters;
+    const { _id, name, joke, ssn } = req.body.queryResult.parameters;
    
     let body;
     let statusCode;
@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
                 ssn: ssn
             });
 
-            body = { fulfillmentText: `Adicionei mais uma piada na sua lista, ${addedJoke._id} é o código dela para caso você queira atualiza-la ou deleta-la depois.\nQuer que eu te conte uma piada agora?`};
+            body = { fulfillmentText: `Adicionei mais uma piada na sua lista, ${addedJoke._id} é o código dela para caso você queira atualiza-la ou deleta-la depois.\nQuer que eu te conte uma piada agora?` };
         } else if (intentName === 'piada.geral') {
             const generalJokes = await Joke.find({ list: 'geral' });
 
@@ -61,7 +61,18 @@ module.exports = async (req, res) => {
             } else {
                 const personalJoke = personalJokes[Math.floor(Math.random() * personalJokes.length)];
 
-                body = { fulfillmentText: `Contemple uma de suas pérolas ${personalJoke.name}:\n${personalJoke.joke}\nAté a próxima haha`};
+                body = { fulfillmentText: `Contemple uma de suas pérolas ${personalJoke.name}:\n${personalJoke.joke}\nAté a próxima haha` };
+            }
+        } else if (intentName === 'piada.confirmar.atualizar' || intentName === 'piada.confirmar.deletar') {
+            const requestedJoke = await Joke.find({ 
+                _id: _id,  
+                ssn: ssn 
+            });
+
+            if (requestedJoke.length === 0) {
+                body = { fulfillmentText: "Não encontrei nenhuma piada com o código informado atrelado ao cpf mencionado.\nAté a próxima haha" }
+            } else {
+                body = { fulfillmentText: `Tem certeza que deseja excluir a seguinte piada? "${requestedJoke[0].joke}"` }
             }
         }
 
