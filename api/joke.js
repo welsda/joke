@@ -101,6 +101,14 @@ module.exports = async (req, res) => {
             body = { fulfillmentText: 'Não deu pra pegar uma piada do nosso banco de dados pra você por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha' };
         } else if (intentName === 'piada.pessoal') {
             body = { fulfillmentText: 'Não deu pra pegar uma piada da sua lista por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha' };
+        } else if (intentName === 'piada.atualizar') {
+            body = { fulfillmentText: 'Não deu pra atualizar a piada da sua lista por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha' };
+        } else if (intentName === 'piada.deletar') {
+            body = { fulfillmentText: 'Não deu pra deletar a piada da sua lista por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha' };
+        } else if (intentName === 'piada.confirmar.atualizar') {
+            body = { fulfillmentText: 'Não deu pra prosseguir com a atualização da piada da sua lista por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha' };
+        } else if (intentName === 'piada.confirmar.deletar') {
+            body = { fulfillmentText: 'Não deu pra prosseguir com a deleção aa piada da sua lista por conta de algo estranho :/, quem sabe depois.\nAté a próxima haha' };
         }
 
         statusCode = 400;
