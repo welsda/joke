@@ -80,7 +80,13 @@ module.exports = async (req, res) => {
                 }
             }
         } else if (intentName === 'piada.atualizar' || intentName === 'piada.deletar') {
-            body = { fulfillmentText: "test" }
+            const { _id } = req.body.queryResult.outputContexts[0].parameters;
+
+            if (intentName === 'piada.deletar') {
+                const deletedJoke = await Joke.findByIdAndDelete(_id);
+
+                body = { fulfillmentText: deletedJoke };
+            }
         }
 
         statusCode = 200;
