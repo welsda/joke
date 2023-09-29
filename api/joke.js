@@ -13,9 +13,11 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    const intentName = req.body.queryResult.intent.displayName;
     const { _id, name, joke, ssn } = req.body.queryResult.parameters;
-   
+    const _idWithoutWhiteSpaces = _id.replace(/\s/g, '');
+    const intentName = req.body.queryResult.intent.displayName;
+    const ssnWithoutWhiteSpaces = ssn.replace(/\s/g, '');
+
     let body;
     let statusCode;
 
@@ -27,7 +29,7 @@ module.exports = async (req, res) => {
                 joke: joke,
                 list: 'pessoal',
                 name: name,
-                ssn: ssn
+                ssn: ssnWithoutWhiteSpaces
             });
 
             body = { fulfillmentText: `Adicionei mais uma piada na sua lista, ${addedJoke._id} é o código dela para caso você queira atualiza-la ou deleta-la depois.\nQuer que eu te conte uma piada agora?` };
@@ -38,7 +40,7 @@ module.exports = async (req, res) => {
             ? body = { fulfillmentText: "Hmm, parece que nosso banco de dados não têm piadas pra você :/, mas não se preocupe que logo menos estarão lá.\nAté a próxima haha" }
             : body = { fulfillmentText: `${generalJokes[Math.floor(Math.random() * generalJokes.length)].joke}\nAté a próxima haha` };
         } else if (intentName === 'piada.pessoal') {
-            const personalJokes = await Joke.find({ ssn: ssn });
+            const personalJokes = await Joke.find({ ssn: ssnWithoutWhiteSpaces });
 
             if (personalJokes.length === 0) {
                 body = {
@@ -64,15 +66,18 @@ module.exports = async (req, res) => {
                 body = { fulfillmentText: `Contemple uma de suas pérolas ${personalJoke.name}:\n${personalJoke.joke}\nAté a próxima haha` };
             }
         } else if (intentName === 'piada.confirmar.atualizar' || intentName === 'piada.confirmar.deletar') {
-            const requestedJoke = await Joke.find({ 
-                _id: _id,  
-                ssn: ssn 
-            });
+            const requestedJoke = await Joke.findById(_idWithoutWhiteSpaces);
 
-            if (requestedJoke.length === 0) {
-                body = { fulfillmentText: "Não encontrei nenhuma piada com o código informado atrelado ao cpf mencionado.\nAté a próxima haha" }
+            if (requestedJoke === null) {
+                body = { fulfillmentText: "Não encontrei nenhuma piada com o código informado.\nAté a próxima haha" };
             } else {
-                body = { fulfillmentText: `Tem certeza que deseja excluir a seguinte piada? "${requestedJoke[0].joke}"` }
+                if (requestedJoke.ssn === ssnWithoutWhiteSpaces) {
+                    intentName === 'piada.confirmar.atualizar'
+                    ? body = { fulfillmentText: `Tem certeza que deseja atualizar a seguinte piada? "${requestedJoke.joke}"` }
+                    : body = { fulfillmentText: `Tem certeza que deseja deletar a seguinte piada? "${requestedJoke.joke}"` };
+                } else {
+                    body = { fulfillmentText: "Não encontrei nenhuma piada com o código informado atrelado ao cpf mencionado.\nAté a próxima haha" };
+                }
             }
         }
 
