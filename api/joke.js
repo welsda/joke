@@ -79,6 +79,8 @@ module.exports = async (req, res) => {
                     body = { fulfillmentText: "Não encontrei nenhuma piada com o código informado atrelado ao cpf mencionado.\nAté a próxima haha" };
                 }
             }
+        } else if (intentName === 'piada.atualizar' || intentName === 'piada.deletar') {
+            body = { fulfillmentText: "test" }
         }
 
         statusCode = 200;
