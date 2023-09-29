@@ -89,7 +89,7 @@ module.exports = async (req, res) => {
             } else {
                 const updatedJoke = await Joke.findByIdAndUpdate(_id, { joke: joke }, { new: true });
 
-                body = { fulfillmentText: `Sua piada foi atualizada na sua lista com sucesso. Agora ela está assim "${updatedJoke.joke}"\nAté a próxima haha` };
+                body = { fulfillmentText: `Sua piada foi atualizada na sua lista com sucesso. Agora ela está assim: "${updatedJoke.joke}"\nAté a próxima haha` };
             }
         }
 
