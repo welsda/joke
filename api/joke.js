@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
                 ssn: ssnWithoutWhiteSpaces
             });
 
-            body = { fulfillmentText: `Adicionei mais uma piada na sua lista, ${addedJoke._id} é o código dela para caso você queira atualiza-la ou deleta-la depois.\nQuer que eu te conte uma piada agora?` };
+            body = { fulfillmentText: `Adicionei mais uma piada na sua lista, ${addedJoke._id} é o código dela para caso você queira atualiza-la ou deleta-la depois.\nAté a próxima haha` };
         } else if (intentName === 'piada.geral') {
             const generalJokes = await Joke.find({ list: 'geral' });
 
