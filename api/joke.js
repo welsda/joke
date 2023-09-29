@@ -85,7 +85,11 @@ module.exports = async (req, res) => {
             if (intentName === 'piada.deletar') {
                 const deletedJoke = await Joke.findByIdAndDelete(_id);
 
-                body = { fulfillmentText: deletedJoke };
+                body = { fulfillmentText: `Sua piada "${deletedJoke.joke}" foi deletada da sua lista com sucesso.\nAté a próxima haha` };
+            } else {
+                const updatedJoke = await Joke.findByIdAndUpdate(_id, { joke: joke }, { new: true });
+
+                body = { fulfillmentText: `Sua piada foi atualizada na sua lista com sucesso. Agora ela está assim "${updatedJoke.joke}"\nAté a próxima haha` };
             }
         }
 
